@@ -11,8 +11,8 @@
 \newcommand{\ps}{ Problem Set 1 }
 
 %\pagestyle{headings}
-\usepackage[dvips]{graphics,color}
 \usepackage{amsfonts}
+\usepackage{graphicx}
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{latexsym}
@@ -57,7 +57,14 @@ The teacher should not be able to view the submissions of students not currently
 
 
 \answer{1-2 - Reused Pad Cipher}
-A.
+A. Suppose we apply the XOR function on two bits A and B: XOR(A,B)=C. Given B and C, we can determine A (specifically, XOR(B,C)=A). We can show this by enumerating all four possibilities in the XOR input table: \\
+\begin{center}
+\includegraphics{xor-table.png}
+\end{center}
+
+That means that given a byte of ciphertext, there are twenty-six possibilities for the corresponding byte in the pad (we know all bytes in the plain text are alphabetic characters). We can choose among these 26 possibilities by seeing which pad XOR'd with the corresponding byte in the other ciphertext produces a alphabetic character. If none of the 26 possibilities result in the other ciphertext decrypting to an alphabetic character, we can assume the two ciphertexts came from two different pads. If more than one possibility produces an alphabetic character, we can determine which one by moving on to the next byte, applying the same analysis and examining at the end which one produces a dictionary word.
+
+The following Python script does this for us:
 
 B. 
 
