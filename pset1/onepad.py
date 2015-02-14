@@ -10,7 +10,7 @@ PT1 = []
 PT2 = []
 
 for i, val in enumerate(CT1_num):
-    pad_byte_possibilities = [a^val for a in alphabet if ((a^val)>64 and (a^val)<123)]
+    pad_byte_possibilities = [a^val for a in alphabet]
     print i, pad_byte_possibilities
     
     lst1 = []
