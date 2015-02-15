@@ -1,29 +1,28 @@
-CT1 = 'd2 6b a5 0d 27 6a 34 2d 8e 53 0e'.split(' ')
-CT2 = 'de 6e a7 00 30 74 34 2b 8e 51 11'.split(' ')
+CT1_str = 'd2 6b a5 0d 27 6a 34 2d 8e 53 0e'
+CT2_str = 'de 6e a7 00 30 74 34 2b 8e 51 11'
 
-CT1_num = [int(byte, 16) for byte in CT1]
-CT2_num = [int(byte, 16) for byte in CT2]
+CT1 = [int(byte, 16) for byte in CT1_str.split(' ')]
+CT2 = [int(byte, 16) for byte in CT2_str.split(' ')]
 
-alphabet = [i+65 for i in range(58)]
+def xor(xs, ys):
+    '''Perform pairwise XOR operation on two lists'''
+    return [x ^ y for x, y in zip(xs, ys)]
 
-PT1 = []
-PT2 = []
+X = xor(CT1, CT2)
 
-for i, val in enumerate(CT1_num):
-    pad_byte_possibilities = [a^val for a in alphabet]
-    print i, pad_byte_possibilities
-    
-    lst1 = []
-    lst2 = []
-    for possibility in pad_byte_possibilities:
-        temp = possibility ^ CT2_num[i]
-        if temp > 64 and temp < 123:
-            lst2.append(str(unichr(temp)))
-            lst1.append(str(unichr(possibility ^ CT1_num[i])))
+dictionary = open('dictionary', 'r').read().split()
+words = set()
+for w in dictionary:
+    if len(w) == len(X):
+        try:
+            words.add(w.upper().encode())
+        except:
+            print 'Problem encoding', w
 
-    PT2.append(lst2)
-    PT1.append(lst1)
-
-print PT1
-print PT2
-
+for PT1_str in words:
+    PT1 = [ord(byte) for byte in PT1_str]
+    PT2 = xor(PT1, X)
+    PT2_str = "".join([chr(byte) for byte in PT2])
+    if PT2_str in words:
+        pad = xor(PT1, CT1)
+        print('PT1 = %s, PT2 = %s, pad = %s' % (PT1_str, PT2_str, pad))
