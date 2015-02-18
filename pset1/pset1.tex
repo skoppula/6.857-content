@@ -61,23 +61,23 @@
 The teacher should not be able to view the submissions of students not currently in their course. They should not be able to update the content of the courses that they were not authorized to administer.\\
 
 Out of the 3 security goals, integrity is the most relevant for edX. 
-\item having students changing other students' data
-\item course staff changing other course staff's courses
-\item students changing course staff's data
-\item having students earn their certificates honorably
+item having students changing other students' data
+item course staff changing other course staff's courses
+item students changing course staff's data
+item having students earn their certificates honorably
 
 Confidentiality:
-\item only students and teachers should be able to see grades
+item only students and teachers should be able to see grades
 
 Availability:
-\item not as pressing as say, a hospital service, not endangering lives
-\item everything/permissions should be maintained even if service becomes unavailable
+item not as pressing as say, a hospital service, not endangering lives
+item everything/permissions should be maintained even if service becomes unavailable
 
 \answer{1-2 - Reused Pad Cipher}
 A. They were encrypted using the same pad. The two words are ADVERSARIAL AND MATHEMATICS. We used the following script:
 \inputminted{python}{onepad.py}
 
-B. There are four messages and three unique pads. $3 \choose 2 = 3$, so at least two messages will have the same two pads applied to them. If we XOR those two pads together, the pads will cancel. Take each pair of two messages, XOR them together. One of the six pairs will have the pad canceled out. Determine this by taking the XOR of 'the' and each position within the XOR-pair-product. If we get bits of real words after taking that XOR, we continue guessing that word and repeat the XOR and extend process, until the two messages that made that pair are deciphered.
+B. There are four messages and three unique pads. $3 \choose 2$$=3$, so at least two messages will have the same two pads applied to them. If we XOR those two pads together, the pads will cancel. Take each pair of two messages, XOR them together. One of the six pairs will have the pad canceled out. Determine this by taking the XOR of 'the' and each position within the XOR-pair-product. If we get bits of real words after taking that XOR, we continue guessing that word and repeat the XOR and extend process, until the two messages that made that pair are deciphered.
 
 \answer{1-3 - Reused Pad Cipher}
 \begin{itemize}
