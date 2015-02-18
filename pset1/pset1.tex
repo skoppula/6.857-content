@@ -43,58 +43,112 @@
 
 \answer{1-1 - An edX Security Policy}
 
-\textbf{Objective}: The EdX MOOC platform aims to provide educational content to users of the platform. The platform includes other auxiliary objectives such as being able to update course content, provide inter-person interactivity, and reward users for course completion.\\
+\section{Objective}
+The purpose of this security policy is to outline the security goals and usages of a massive open online course platform (MOOC) like edX. In this document, we define policies regarding user roles and their permissions, as well as privacy and sharing of data.
 
-\textbf{Principals and Authorized Behavior}: The platform has three main roles: student, teacher, and administrator. Each have their own set of allowed functions:
+\section{Introduction}
+EdX is a non-profit, open source MOOC platform that aims to provide educational content to worldwide users. Users sign up on edX and gain access to online courses in a wide range of subjects, administered by accredited universities and organizations around the world. After successful completion of a course, a user may achieve a certificate of completion.\\
+
+Courses, run by universities, are administered by staff that handle the operations of the course. These staff members control course content and the student experience.\\
+
+\section{Principals and Authorized Behavior}
+The platform has a hierarchy of roles. They are, in order: edX employees, universities, course staff, students, and everyone. Each have their own set of allowed functions:
+
+\subsection{edX employees}
+\subsection{Universities}
+\subsection{Course staff}
+(Instructors and TAs): authorize student enrollment into their course, authorize other instructors to co-administer their course, modify course meta-data (name, description) and content, send signed feedback to student, view the submissions of student enrolled in their course(s), modify their own profile information (email, login username, password), add new course, and award certificate of completion to select student users.
+\subsection{Students}
+A student must be able to request enrollment into a course, view content for an  enrolled courses (to the extent allowed by course instructor(s)), submit digitally signed answers and feedback to (enrolled) course instructor, modify their own profile information (login username, password, email), and receive certificate of completions as determined by the instructor.\\
+
+Honor Code Certificate Candidate\\
+Verified Certificate Candidate\\
+
+\subsection{Everyone}
+
+\section{Authentication}
+
+\section{Security Goals}
+Out of the 3 general security goals, integrity is the most relevant and crucial for edX. Since edX-type platforms are metaphorical to a traditional classroom, courses need to maintain the integrity of their data, and unauthorized users such as students or administrators of other courses should not be able to modify a specific course's data. Confidentiality is another important goal - the information of edX users should not be compromised to unauthorized parties.
+
+\subsection{Integrity}
+Specific security goals that fall under integrity include the following.
 \begin{itemize}
-\item Student: a student must be able to request enrollment into a course, view content for an  enrolled courses (to the extent allowed by course instructor(s)), submit digitally signed answers and feedback to (enrolled) course instructor, modify their own profile information (login username, password, email), and receive certificate of completions as determined by the instructor.
-\indent\item Honor Code Certificate Candidate
-\indent\item Verified Certificate Candidate
-\indent Course Staff (Instructors and TAs): authorize student enrollment into their course, authorize other instructors to co-administer their course, modify course meta-data (name, description) and content, send signed feedback to student, view the submissions of student enrolled in their course(s), modify their own profile information (email, login username, password), add new course, and award certificate of completion to select student users.
-\item Universities:
-\item Everyone
-\item edX Employees
+\item Ensuring that anyone with permissions of or lower than that of a student cannot change another student's data or course data.
+\item Ensuring that course staff cannot change data of courses they are not administrators of.
+\item Ensuring that students cannot change their own data in an abnormal way, e.g. unauthorized modification of test scores.
+\item Ensuring that students earn completion certificates honorably.
+\end{itemize}
+
+\subsection{Confidentiality}
+\begin{itemize}
+\item only students and teachers should be able to see grades
+\end{itemize}
+
+\subsection{Availability}
+\begin{itemize}
+\item not as pressing as say, a hospital service, not endangering lives
+\item everything/permissions should be maintained even if service becomes unavailable
 \end{itemize}
 
 \textbf{Confidentiality/Integrity Details:}: Specifically, by use of some security mechanism (perhaps, OAuth 2.0 or like), we intend that the platform forbids the student viewing or modify the content and progress of other users (except to view the content of their enrolled courses as allowed by their course instructors). The student should not be able to obtain completion certificates without proper authentication.\\
 
 The teacher should not be able to view the submissions of students not currently in their course. They should not be able to update the content of the courses that they were not authorized to administer.\\
 
-Out of the 3 security goals, integrity is the most relevant for edX. 
-item having students changing other students' data
-item course staff changing other course staff's courses
-item students changing course staff's data
-item having students earn their certificates honorably
-
-Confidentiality:
-item only students and teachers should be able to see grades
-
-Availability:
-item not as pressing as say, a hospital service, not endangering lives
-item everything/permissions should be maintained even if service becomes unavailable
-
 \answer{1-2 - Reused Pad Cipher}
 A. They were encrypted using the same pad. The two words are ADVERSARIAL AND MATHEMATICS. We used the following script:
 \inputminted{python}{onepad.py}
 
+
 B. There are four messages and three unique pads. $3 \choose 2$$=3$, so at least two messages will have the same two pads applied to them. If we XOR those two pads together, the pads will cancel. Take each pair of two messages, XOR them together. One of the six pairs will have the pad canceled out. Determine this by taking the XOR of 'the' and each position within the XOR-pair-product. If we get bits of real words after taking that XOR, we continue guessing that word and repeat the XOR and extend process, until the two messages that made that pair are deciphered.
 
-\answer{1-3 - Reused Pad Cipher}
-\begin{itemize}
-  \item Insecure implementation - The implementation of a theoretically secure algorithms might have vulnerabilities. For example, the OpenSSL library this year was revealed to have a buffer over-read bug, Heartbleed.
-  \item Improper use -  users might misuse otherwise secure software/algorithms. For example, short/weak keys and re-using passwords could introduce vulnerabilities.
-  \item Legal retrieval - the government (for example) might file court orders to obtain private keys
-  \item Social engineering - adversaries could extract personal information. A great example might be email or phone call phishing, in which unsuspecting victims reveal personal information to agents posing as authorities.
-  \item Hardware injection - an example is keyloggers, tracking keystrokes and potentially passwords, or inserting things into routers.
-  \item backdoors, bribery, coercion
-  \item Using metadata or indirect data such as timing (i.e. side channel timing attacks)
-  \item Insert faulty standards into commonly used encryption tools/algorithms, like not-so-random random number generators.
-\end{itemize}
+\answer{1-3 - Subverting Cryptography}
+\begin{enumerate}
+\item Insecure implementation: the implementation of a theoretically secure algorithms might have vulnerabilities
+	\begin{itemize}
+	\item The OpenSSL library this year was revealed to have a buffer over-read bug, Heartbleed.
+	\item The NSA has inserted faulty code/backdoors in commonly used random number generators.
+	\end{itemize}
+	\textbf{DEFENSE: } Do not use 3rd party code. Implement everything, like random number generators and even basic algorithms, on your own.
+\item Improper use: users may misuse otherwise secure software and/or algorithms
+	\begin{itemize}
+	\item Users may create short or weak keys
+	\item Users may re-use passwords
+	\end{itemize}
+	\textbf{DEFENSE: } Create strong restrictions for user inputs to ensure strong key creation.
+\item Hardware injection: tampering with physical devices
+	\begin{itemize}
+	\item Keyloggers to track keystrokes and potentially passwords
+	\item Inserting backdoors into internet routers
+	\end{itemize}
+	\textbf{DEFENSE: } Only use devices from a trusted resource, only use devices you create yourself.
+\item Compulsion: Legal Retrieval by Government
+	\begin{itemize}
+	\item Court orders to obtain private keys
+	\end{itemize}
+	\textbf{DEFENSE: } Host data in a different country, start your own country without these rules. Get a good lawyer.
+\item Social engineering: extracting personal information to gain useful information
+	\begin{itemize}
+	\item Email or phone phishing
+	\end{itemize}
+	\textbf{DEFENSE: } Adblock. Spam filters. Common Sense.
+\item Indirect Computational Data
+	\begin{itemize}
+	\item Using metadata of a message to learn information about the message
+	\item Timing attacks (i.e. side channel timing attacks) that determine message based on how long it takes per step of computation
+	\end{itemize}
+	\textbf{DEFENSE: } Introduce more randomness (i.e. in length) into metadata and actual message.
+\item Coercion: bribery and corruption
+	\begin{itemize}
+	\item Pay NSA employees more than the government to spill secrets
+	\item Give money in exchange for information
+	\end{itemize}
+	\textbf{DEFENSE: } Pay your employees a sufficient wage. Only hire people you trust.
+\item Subversion: abuse trust commercial sector has in a body like the NSA
+\textbf{DEFENSE: } Don't put your trust in governmental bodies, or other bodies of "authority."
+\item 
 
-
-\answer{1-3 - Vulnerability/Mechanism Chains}
-
-
+\end{enumerate}
 
 \end{document}
 
