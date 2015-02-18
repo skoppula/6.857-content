@@ -99,31 +99,52 @@ The teacher should not be able to view the submissions of students not currently
 A. They were encrypted using the same pad. The two words are ADVERSARIAL AND MATHEMATICS. We used the following script:
 \inputminted{python}{onepad.py}
 
-B.
-\begin{itemize}
-\item iterate between all pairs of ciphertexts
-\item xor the pair together
-\item search through xor'd output and try to find common words
-\item if found, we have a winner
-\item else, move on to next pair
-\end{itemize}
 
-\answer{1-3 - Reused Pad Cipher}
-\begin{itemize}
-  \item Insecure implementation - The implementation of a theoretically secure algorithms might have vulnerabilities. For example, the OpenSSL library this year was revealed to have a buffer over-read bug, Heartbleed.
-  \item Improper use -  users might misuse otherwise secure software/algorithms. For example, short/weak keys and re-using passwords could introduce vulnerabilities.
-  \item Legal retrieval - the government (for example) might file court orders to obtain private keys
-  \item Social engineering - adversaries could extract personal information. A great example might be email or phone call phishing, in which unsuspecting victims reveal personal information to agents posing as authorities.
-  \item Hardware injection - an example is keyloggers, tracking keystrokes and potentially passwords, or inserting things into routers.
-  \item backdoors, bribery, coercion
-  \item Using metadata or indirect data such as timing (i.e. side channel timing attacks)
-  \item Insert faulty code into commonly used encryption tools/algorithms, like random number generators.
-\end{itemize}
+B. There are four messages and three unique pads. $3 \choose 2$$=3$, so at least two messages will have the same two pads applied to them. If we XOR those two pads together, the pads will cancel. Take each pair of two messages, XOR them together. One of the six pairs will have the pad canceled out. Determine this by taking the XOR of 'the' and each position within the XOR-pair-product. If we get bits of real words after taking that XOR, we continue guessing that word and repeat the XOR and extend process, until the two messages that made that pair are deciphered.
 
-
-\answer{1-3 - Vulnerability/Mechanism Chains}
-
-
+\answer{1-3 - Subverting Cryptography}
+\begin{enumerate}
+\item Insecure implementation: the implementation of a theoretically secure algorithms might have vulnerabilities
+	\begin{itemize}
+	\item The OpenSSL library this year was revealed to have a buffer over-read bug, Heartbleed.
+	\item The NSA has inserted faulty code/backdoors in commonly used random number generators.
+	\end{itemize}
+	\textbf{SOLUTION: } Do not use 3rd party code. Implement everything on your own.
+\item Improper use: users may misuse otherwise secure software and/or algorithms
+	\begin{itemize}
+	\item Users may create short or weak keys
+	\item Users may re-use passwords
+	\end{itemize}
+	\textbf{SOLUTION: } Create strong restrictions for user inputs to ensure strong key creation.
+\item Hardware injection: tampering with physical devices
+	\begin{itemize}
+	\item Keyloggers to track keystrokes and potentially passwords
+	\item Inserting backdoors into internet routers
+	\end{itemize}
+	\textbf{SOLUTION: } Only use devices from a trusted resource, only use devices you create yourself.
+\item Coercion: Legal Retrieval by Government
+	\begin{itemize}
+	\item Court orders to obtain private keys
+	\end{itemize}
+	\textbf{SOLUTION: } Host data in a different country, start your own country without these rules. Get a good lawyer.
+\item Social engineering: extracting personal information to gain useful information
+	\begin{itemize}
+	\item Email or phone phishing
+	\end{itemize}
+	\textbf{SOLUTION: } Adblock. Spam filters. Common Sense.
+\item Indirect Computational Data
+	\begin{itemize}
+	\item Using metadata of a message to learn information about the message
+	\item Timing attacks (i.e. side channel timing attacks) that determine message based on how long it takes per step of computation
+	\end{itemize}
+	\textbf{SOLUTION: } Introduce more randomness (i.e. in length) into metadata and actual message.
+\item Bribery and corruption
+	\begin{itemize}
+	\item Pay NSA employees more than the government to spill secrets
+	\item Give money in exchange for information
+	\end{itemize}
+	\textbf{SOLUTION: } Pay your employees a sufficient wage. Only hire people you trust.
+\end{enumerate}
 
 \end{document}
 
