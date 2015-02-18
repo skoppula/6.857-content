@@ -86,41 +86,45 @@ B. There are four messages and three unique pads. $3 \choose 2$$=3$, so at least
 	\item The OpenSSL library this year was revealed to have a buffer over-read bug, Heartbleed.
 	\item The NSA has inserted faulty code/backdoors in commonly used random number generators.
 	\end{itemize}
-	\textbf{SOLUTION: } Do not use 3rd party code. Implement everything on your own.
+	\textbf{DEFENSE: } Do not use 3rd party code. Implement everything, like random number generators and even basic algorithms, on your own.
 \item Improper use: users may misuse otherwise secure software and/or algorithms
 	\begin{itemize}
 	\item Users may create short or weak keys
 	\item Users may re-use passwords
 	\end{itemize}
-	\textbf{SOLUTION: } Create strong restrictions for user inputs to ensure strong key creation.
+	\textbf{DEFENSE: } Create strong restrictions for user inputs to ensure strong key creation.
 \item Hardware injection: tampering with physical devices
 	\begin{itemize}
 	\item Keyloggers to track keystrokes and potentially passwords
 	\item Inserting backdoors into internet routers
 	\end{itemize}
-	\textbf{SOLUTION: } Only use devices from a trusted resource, only use devices you create yourself.
-\item Coercion: Legal Retrieval by Government
+	\textbf{DEFENSE: } Only use devices from a trusted resource, only use devices you create yourself.
+\item Compulsion: Legal Retrieval by Government
 	\begin{itemize}
 	\item Court orders to obtain private keys
 	\end{itemize}
-	\textbf{SOLUTION: } Host data in a different country, start your own country without these rules. Get a good lawyer.
+	\textbf{DEFENSE: } Host data in a different country, start your own country without these rules. Get a good lawyer.
 \item Social engineering: extracting personal information to gain useful information
 	\begin{itemize}
 	\item Email or phone phishing
 	\end{itemize}
-	\textbf{SOLUTION: } Adblock. Spam filters. Common Sense.
+	\textbf{DEFENSE: } Adblock. Spam filters. Common Sense.
 \item Indirect Computational Data
 	\begin{itemize}
 	\item Using metadata of a message to learn information about the message
 	\item Timing attacks (i.e. side channel timing attacks) that determine message based on how long it takes per step of computation
 	\end{itemize}
-	\textbf{SOLUTION: } Introduce more randomness (i.e. in length) into metadata and actual message.
-\item Bribery and corruption
+	\textbf{DEFENSE: } Introduce more randomness (i.e. in length) into metadata and actual message.
+\item Coercion: bribery and corruption
 	\begin{itemize}
 	\item Pay NSA employees more than the government to spill secrets
 	\item Give money in exchange for information
 	\end{itemize}
-	\textbf{SOLUTION: } Pay your employees a sufficient wage. Only hire people you trust.
+	\textbf{DEFENSE: } Pay your employees a sufficient wage. Only hire people you trust.
+\item Subversion: abuse trust commercial sector has in a body like the NSA
+\textbf{DEFENSE: } Don't put your trust in governmental bodies, or other bodies of "authority."
+\item 
+
 \end{enumerate}
 
 \end{document}
