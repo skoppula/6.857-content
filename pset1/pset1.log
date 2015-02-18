@@ -1,8 +1,8 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.2.8)  15 FEB 2015 12:00
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.2.8)  17 FEB 2015 19:14
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
-**pset1
+**pset1.tex
 (./pset1.tex
 LaTeX2e <2011/06/27>
 Babel <3.9h> and hyphenation patterns for 2 languages loaded.
@@ -346,49 +346,77 @@ File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 50.
 
-Underfull \hbox (badness 10000) in paragraph at lines 55--56
+Underfull \hbox (badness 10000) in paragraph at lines 59--60
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 61--62
 
  []
 
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (14.09998pt too wide) in paragraph at lines 60--60
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
+Overfull \hbox (14.09998pt too wide) in paragraph at lines 76--76
 []
  []
-
-runsystem(pygmentize -l python -f latex -F tokenmerge -P style=default -P comma
-ndprefix=PYGdefault -o "_minted-pset1/32F5B20BC7860CCD9F99131B8A98CC8669051FE01
-36C3787C217FCBED018CDAF.pygtex" "onepad.py" )...executed.
 
 
 (./_minted-pset1/32F5B20BC7860CCD9F99131B8A98CC8669051FE0136C3787C217FCBED018CD
 AF.pygtex
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10.95> not available
 (Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 5.
-) [2]
-Overfull \hbox (14.09998pt too wide) in paragraph at lines 67--67
+)
+LaTeX Font Info:    Try loading font information for U+msa on input line 80.
+ (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 80.
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Try loading font information for U+lasy on input line 80.
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/ulasy.fd
+File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
+)
+
+Package amsmath Warning: Foreign command \atopwithdelims;
+(amsmath)                \frac or \genfrac should be used instead
+(amsmath)                 on input line 80.
+
+[3]
+Overfull \hbox (14.09998pt too wide) in paragraph at lines 82--82
 []
  []
 
-[3] (./pset1.aux) ) 
+[4]
+Overfull \hbox (14.09998pt too wide) in paragraph at lines 95--95
+[]
+ []
+
+[5] (./pset1.aux) ) 
 Here is how much of TeX's memory you used:
- 5098 strings out of 495028
- 78178 string characters out of 6181498
- 172859 words of memory out of 5000000
- 8231 multiletter control sequences out of 15000+600000
- 4841 words of font info for 19 fonts, out of 8000000 for 9000
+ 5151 strings out of 495028
+ 79103 string characters out of 6181498
+ 173952 words of memory out of 5000000
+ 8260 multiletter control sequences out of 15000+600000
+ 9250 words of font info for 38 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 37i,6n,35p,812b,291s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,6n,35p,816b,289s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmit
-t10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on pset1.pdf (3 pages, 70623 bytes).
+m/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex
+10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmitt10.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on pset1.pdf (5 pages, 88870 bytes).
 PDF statistics:
- 34 PDF objects out of 1000 (max. 8388607)
- 23 compressed objects within 1 object stream
+ 48 PDF objects out of 1000 (max. 8388607)
+ 33 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
