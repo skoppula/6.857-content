@@ -97,10 +97,19 @@ The teacher should not be able to view the submissions of students not currently
 
 \answer{1-2 - Reused Pad Cipher}
 A. They were encrypted using the same pad. The two words are ADVERSARIAL AND MATHEMATICS. We used the following script:
-\inputminted{python}{onepad.py}
+\inputminted{python}{2a.py}
 
+B. There are four messages and three unique pads. Therefore at least two messages will have the same two pads applied to them ($3 \choose 2$$=3$). If we XOR those two pads together, the pads will cancel. Once we obtain the pad-canceled XOR of two messages, we peel apart the two messages via crib-dragging.\\
 
-B. There are four messages and three unique pads. $3 \choose 2$$=3$, so at least two messages will have the same two pads applied to them. If we XOR those two pads together, the pads will cancel. Take each pair of two messages, XOR them together. One of the six pairs will have the pad canceled out. Determine this by taking the XOR of 'the' and each position within the XOR-pair-product. If we get bits of real words after taking that XOR, we continue guessing that word and repeat the XOR and extend process, until the two messages that made that pair are deciphered.
+First, to identify which of the six possible pairwise combinations have the pads cancel out, we compute all six and count the frequency of '0' in the hex representation of each cross. All lowercase ascii [a-z] share the same last four bits, so the XOR of two plaintext paragraphs will contain a signature with plenty of zeroes.\\
+
+		Now we try peeling apart the two messages via crib-dragging. We took a few common words like ' the ' or ' is ' and XOR'd them along every position in our message product. If the common word is in that position in one of the messages, bits of the other message will be revealed. We extrapolate and guess words from those bits, and repeat the process. \mintinline{bash}{grep} us helped extrapolate possibilities for words given the dictionary. We were also thinking of XOR'ing big words and testing for resulting smaller words in the other message.\\
+
+We wrote the following interactive script to speed up and automate entering a crib, XOR'ing along the positions, and choosing the correct position (if any).
+\inputminted{python}{2b.py}
+
+From this we discovered that we were able to descrypt parts of the \textbf{first} and the \text{fourth} messages. The two messages:\\
+\inputminted{python}{decrypted-message.txt}
 
 \answer{1-3 - Subverting Cryptography}
 \begin{enumerate}
@@ -146,7 +155,6 @@ B. There are four messages and three unique pads. $3 \choose 2$$=3$, so at least
 	\textbf{DEFENSE: } Pay your employees a sufficient wage. Only hire people you trust.
 \item Subversion: abuse trust commercial sector has in a body like the NSA
 \textbf{DEFENSE: } Don't put your trust in governmental bodies, or other bodies of "authority."
-\item 
 
 \end{enumerate}
 

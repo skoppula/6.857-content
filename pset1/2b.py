@@ -4,16 +4,22 @@ import re
 
 def read_ciphertexts(filename):
     '''Reads ciphertexts from file and removes spaces'''
-    ciphers = open('ciphers.txt', 'r').read()
+    ciphers = open(filename, 'r').read()
     ciphers = ciphers.split('\n')[::2]
     return [text.replace(' ', '').decode('hex') for text in ciphers]
 
+def get_dictionary(filename):
+    '''Read dictionary file and returns set of words'''
+    dictionary = open(filename).read()
+    return set(ciphers.split('\n'))
+
 def is_int(i):
-        try:
-            int(i)
-            return True
-        except ValueError:
-            return False
+    '''Tests if variable is valid integer value'''
+    try:
+        int(i)
+        return True
+    except ValueError:
+        return False
 
 def str_xor(str1, str2):
     '''Perform pairwise XOR operation on two strings'''

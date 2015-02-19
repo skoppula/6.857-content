@@ -8,3 +8,4 @@ read:
 
 clean:
 		rm -rf ${filename}.log ${filename}.aux missfont.log _minted-${filename} texput.log
+
