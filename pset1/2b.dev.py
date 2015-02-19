@@ -44,7 +44,7 @@ def get_cancelled_pad(ciphertexts):
 def auto_peel_apart_messages(canceled_pad, charset, dictionary):
     
     fdictionary = set([' ' + word + ' ' for word in dictionary if len(word) > 2])
-    big_words = [word for word in dictionary if len(word) > 6]
+    big_words = [word for word in dictionary if len(word) > 4]
 
     print 'Total size of enumeration', len(big_words)
     for i, word in enumerate(big_words):
