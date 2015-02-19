@@ -66,6 +66,7 @@ def peel_apart_messages(canceled_pad, charset):
             else:
                 sys.stdout.write(str(i)+': '+pos_result + '\t\t')
             if i%3 == 0: sys.stdout.write('\n')
+        sys.stdout.write('\n')
 
 	response = raw_input("Enter the position, 'n' for no match, or 'q' to quit: ")
         if response == 'none' or response == 'n':
