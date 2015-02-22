@@ -54,15 +54,18 @@ Courses, run by universities, are administered by staff that handle the operatio
 \section{Principals and Authorized Behavior}
 The platform has a hierarchy of roles. They are, in order: edX employees, universities, course staff, students, and everyone. Each have their own set of allowed functions:
 
-\subsection{edX employees}
-\subsection{Universities}
 \subsection{Course staff}
 Course staff comprises of both Instructors and TAs. Course staff must be able to authorize student enrollment into their course, authorize other instructors to co-administer their course, modify course meta-data (name, description) and content, send signed feedback to student, view the submissions of student enrolled in their course(s), modify their own profile information (email, login username, password), add new courses, and award certificate of completion to select student users.
 \subsection{Students}
 When logged in, a student must be able to request enrollment into a course, view content for an  enrolled courses (to the extent allowed by course instructor(s)), submit digitally signed answers and feedback to (enrolled) course instructor, modify their own profile information (login username, password, email), and receive certificate of completions as determined by the instructor.\\
 
-Honor Code Certificate Candidate\\
-Verified Certificate Candidate\\
+Each student is permitted to recieve only one type of course accredidation after completing the coursework and with course staff approval. Based on whether the student enrolled in the for-credit paid version (Verified Certificate Candidate) or the free version (Honor Code Certificate Candidate), they must recieve the correct certificate, only once.\\
+
+\subsection{edX employees}
+edX employees manage the platform itself and are able to change any content on the platform. They are limited however, from viewing in plaintext, or modifying any user's personal information, such as passwords, credit card numbers, etc.\\
+
+\subsection{Universities}
+Administrators and online education coordinators may create accounts on edX to begin authenticating and verifying new instructor accounts at their university. Each university group is verified and approved by edX employee(s). University accounts are able to view and modify instructor and course affiliation with the university. They may also modify their own account details.\\
 
 \subsection{Everyone}
 Everyone should be able to view an introductory video, read the course description, and read short bios of the instructors of every edX course. Everyone must also be able to register for a new account, or sign in to an existing account.
@@ -101,73 +104,6 @@ Specific security goals that fall under integrity include the following.
 
 The teacher should not be able to view the submissions of students not currently in their course. They should not be able to update the content of the courses that they were not authorized to administer.\\
 
-\answer{1-2 - Reused Pad Cipher}
-A. They were encrypted using the same pad. The two words are ADVERSARIAL AND MATHEMATICS. We used the following script:
-\inputminted{python}{2a.py}
-
-B. There are four messages and three unique pads. Therefore at least two messages will have the same two pads applied to them ($3 \choose 2$$=3$). If we XOR those two pads together, the pads will cancel. Once we obtain the pad-canceled XOR of two messages, we peel apart the two messages via crib-dragging.\\
-
-First, to identify which of the six possible pairwise combinations have the pads cancel out, we compute all six and count the frequency of '0' in the hex representation of each cross. All lowercase ascii [a-z] share the same last four bits, so the XOR of two plaintext paragraphs will contain a signature with plenty of zeroes.\\
-
-		Now we try peeling apart the two messages via crib-dragging. We took a few common words like ' the ' or ' is ' and XOR'd them along every position in our message product. If the common word is in that position in one of the messages, bits of the other message will be revealed. We extrapolate and guess words from those bits, and repeat the process. \mintinline{bash}{grep} us helped extrapolate possibilities for words given the dictionary. We were also thinking of XOR'ing big words and testing for resulting smaller words in the other message.\\
-
-We wrote the following interactive script to speed up and automate entering a crib, XOR'ing along the positions, and choosing the correct position (if any).
-
-\inputminted{python}{2b.py}
-
-From this we discovered that we were able to decrypt parts of the \textbf{first} and the \text{fourth} messages. Once the latter portions of the two messages were decrypted, we were reminded of a couple of quotes from the movie, The Imitation Game, which ultimately led us to find the two messages. The two messages:\\
-\inputminted{python}{decrypted-message.txt}
-
-\answer{1-3 - Subverting Cryptography}
-\begin{enumerate}
-\item Insecure implementation: the implementation of a theoretically secure algorithms might have vulnerabilities
-	\begin{itemize}
-	\item The OpenSSL library this year was revealed to have a buffer over-read bug, Heartbleed.
-	\item The NSA has inserted faulty code/backdoors in commonly used random number generators.
-	\end{itemize}
-	\textbf{DEFENSE: } Do not use 3rd party code. Implement everything, like random number generators and even basic algorithms, on your own.
-\item Improper use: users may misuse otherwise secure software and/or algorithms
-	\begin{itemize}
-	\item Users may create short or weak keys
-	\item Users may re-use passwords
-	\end{itemize}
-	\textbf{DEFENSE: } Create strong restrictions for user inputs to ensure strong key creation.
-\item Hardware injection: tampering with physical devices
-	\begin{itemize}
-	\item Keyloggers to track keystrokes and potentially passwords
-	\item Inserting backdoors into internet routers
-	\end{itemize}
-	\textbf{DEFENSE: } Only use devices from a trusted resource, only use devices you create yourself (i.e. create all your own routers and keyboards).
-\item Government: Legal Retrieval 
-	\begin{itemize}
-	\item Court orders to obtain private keys (compulsion)
-	\item Abusing trust commercial trust has in a body like the NSA, and just asking for the data
-	\end{itemize}
-	\textbf{DEFENSE: } Host data in a different country, start your own country without these rules. Don't put your trust in governmental bodies, or other bodies of "authority." Get a good lawyer. 
-\item Social engineering: extracting personal information to gain useful information
-	\begin{itemize}
-	\item Email or phone phishing
-	\end{itemize}
-	\textbf{DEFENSE: } Adblock. Spam filters. Common Sense.
-\item Indirect Computational Data
-	\begin{itemize}
-	\item Timing attacks (i.e. side channel timing attacks) that determine message based on how long it 
-	\item Using metadata of a message to learn information about the messagetakes per step of computation
-	\end{itemize}
-	\textbf{DEFENSE: } Introduce more randomness (i.e. in length) into actual message, to make timing more uniform. Introduce randomness into metadata.
-\item Coercion: bribery and corruption
-	\begin{itemize}
-	\item Pay NSA employees more than the government to spill secrets
-	\item Give money in exchange for information
-	\end{itemize}
-	\textbf{DEFENSE: } Pay your employees a sufficient wage. Only hire people you trust.
-\item Go after key aggregators instead of the actual message.
-	\begin{itemize}
-	\item Instead of trying to break the crypto, just try to steal the keys.
-	\end{itemize}
-	\textbf{DEFENSE: } Don't use key aggregators. Use one-time keys.
-
-\end{enumerate}
 
 \end{document}
 

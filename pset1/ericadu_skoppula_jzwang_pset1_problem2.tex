@@ -1,0 +1,62 @@
+%
+% 6.857 homework template
+%
+% NOTE:
+% Be sure to define your team members with the \team command
+% Be sure to define the problem set with the \ps command
+% Be sure to use the \answer command for each of your answers 
+\documentclass[11pt]{article}
+
+\newcommand{\team}{ Erica Du \\ Skanda Koppula \\ Jessica Wang }
+\newcommand{\ps}{ Problem Set 1 }
+
+%\pagestyle{headings}
+\usepackage{amsfonts}
+\usepackage{minted}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\setlength{\parskip}{1pc}
+\setlength{\parindent}{0pt}
+\setlength{\topmargin}{-3pc}
+\setlength{\textheight}{9.5in}
+\setlength{\oddsidemargin}{0pc}
+\setlength{\evensidemargin}{0pc}
+\setlength{\textwidth}{6.5in}
+
+\newcommand{\answer}[1]{
+\newpage
+\noindent
+\framebox{
+	\vbox{
+		6.857 Homework \hfill {\bf \ps} \hfill \# #1  \\ 
+		\team \hfill \today
+	}
+}
+\bigskip
+
+}
+
+
+\begin{document}
+
+\answer{1-2 - Reused Pad Cipher}
+A. They were encrypted using the same pad. The two words are ADVERSARIAL AND MATHEMATICS. We used the following script:
+\inputminted{python}{2a.py}
+
+B. There are four messages and three unique pads. Therefore at least two messages will have the same two pads applied to them ($3 \choose 2$$=3$). If we XOR those two pads together, the pads will cancel. Once we obtain the pad-canceled XOR of two messages, we peel apart the two messages via crib-dragging.\\
+
+First, to identify which of the six possible pairwise combinations have the pads cancel out, we compute all six and count the frequency of '0' in the hex representation of each cross. All lowercase ascii [a-z] share the same last four bits, so the XOR of two plaintext paragraphs will contain a signature with plenty of zeroes.\\
+
+		Now we try peeling apart the two messages via crib-dragging. We took a few common words like ' the ' or ' is ' and XOR'd them along every position in our message product. If the common word is in that position in one of the messages, bits of the other message will be revealed. We extrapolate and guess words from those bits, and repeat the process. \mintinline{bash}{grep} us helped extrapolate possibilities for words given the dictionary. We were also thinking of XOR'ing big words and testing for resulting smaller words in the other message.\\
+
+We wrote the following interactive script to speed up and automate entering a crib, XOR'ing along the positions, and choosing the correct position (if any).
+
+\inputminted{python}{2b.py}
+
+From this we discovered that we were able to decrypt parts of the \textbf{first} and the \text{fourth} messages. Once the latter portions of the two messages were decrypted (by guessing common cribs such as ' the ' and ' is ', and daisy-chaining together the cribs that those revealed), we were reminded of a couple of quotes from the movie, The Imitation Game, which ultimately led us to find the two messages. The two messages:\\
+\inputminted{bash}{decrypted-message.txt}
+
+\end{document}
+

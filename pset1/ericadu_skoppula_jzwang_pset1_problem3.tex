@@ -1,0 +1,96 @@
+%
+% 6.857 homework template
+%
+% NOTE:
+% Be sure to define your team members with the \team command
+% Be sure to define the problem set with the \ps command
+% Be sure to use the \answer command for each of your answers 
+\documentclass[11pt]{article}
+
+\newcommand{\team}{ Erica Du \\ Skanda Koppula \\ Jessica Wang }
+\newcommand{\ps}{ Problem Set 1 }
+
+%\pagestyle{headings}
+\usepackage{amsfonts}
+\usepackage{minted}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\setlength{\parskip}{1pc}
+\setlength{\parindent}{0pt}
+\setlength{\topmargin}{-3pc}
+\setlength{\textheight}{9.5in}
+\setlength{\oddsidemargin}{0pc}
+\setlength{\evensidemargin}{0pc}
+\setlength{\textwidth}{6.5in}
+
+\newcommand{\answer}[1]{
+\newpage
+\noindent
+\framebox{
+	\vbox{
+		6.857 Homework \hfill {\bf \ps} \hfill \# #1  \\ 
+		\team \hfill \today
+	}
+}
+\bigskip
+
+}
+
+
+\begin{document}
+
+\answer{1-3 - Subverting Cryptography}
+\begin{enumerate}
+\item Insecure implementation: the implementation of a theoretically secure algorithms might have vulnerabilities
+	\begin{itemize}
+	\item The OpenSSL library this year was revealed to have a buffer over-read bug, Heartbleed.
+	\item The NSA has inserted faulty code/backdoors in commonly used random number generators.
+	\end{itemize}
+	\textbf{DEFENSE: } Verify 3rd party code. Otherwise implement and test everything, like random number generators, on your own.
+\item Improper use: users may misuse otherwise secure software and/or algorithms
+	\begin{itemize}
+	\item Users may create short or weak keys
+	\item Users may re-use passwords
+	\end{itemize}
+	\textbf{DEFENSE: } Create strong restrictions for user inputs to ensure strong key creation.
+\item Hardware injection: tampering with physical devices
+	\begin{itemize}
+	\item Hardware keyloggers to track keystrokes and potentially passwords
+	\item Inserting backdoors into internet routers
+	\end{itemize}
+	\textbf{DEFENSE: } Only use devices from a trusted resource, only use devices you create yourself (i.e. create all your own routers and keyboards).
+\item Government: Legal Retrieval 
+	\begin{itemize}
+	\item Court orders to obtain private keys (compulsion)
+	\item Abusing trust commercial trust has in a body like the NSA, and just asking for the data
+	\end{itemize}
+	\textbf{DEFENSE: } Host data in a different country, start your own country without these rules. Don't put your trust in governmental bodies, or other bodies of "authority." Get a good lawyer. 
+\item Social engineering: extracting personal information to gain useful information
+	\begin{itemize}
+	\item Email or phone phishing
+	\end{itemize}
+	\textbf{DEFENSE: } Adblock. Spam filters. Common Sense.
+\item Indirect Computational Data
+	\begin{itemize}
+	\item Timing attacks (i.e. side channel timing attacks) that determine message based on how long it 
+	\item Using metadata of a message to learn information about the messagetakes per step of computation
+	\end{itemize}
+	\textbf{DEFENSE: } Introduce more randomness (i.e. in length) into actual message, to make timing more uniform. Introduce randomness into metadata.
+\item Coercion: bribery and corruption
+	\begin{itemize}
+	\item Pay NSA employees more than the government to spill secrets
+	\item Give money in exchange for information
+	\end{itemize}
+	\textbf{DEFENSE: } Pay your employees a sufficient wage. Only hire people you trust.
+\item Go after key aggregators instead of the actual message.
+	\begin{itemize}
+	\item Instead of trying to break the crypto, just try to steal the keys.
+	\end{itemize}
+	\textbf{DEFENSE: } Don't use key aggregators. Use one-time keys.
+
+\end{enumerate}
+
+\end{document}
+
