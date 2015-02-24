@@ -47,17 +47,34 @@
 The purpose of this security policy is to outline the security goals and usages of a massive open online course platform (MOOC) like edX. In this document, we define policies regarding user roles and their permissions, as well as privacy and sharing of data.
 
 \section{Introduction}
-EdX is a non-profit, open source MOOC platform that aims to provide educational content to worldwide users. Users sign up on edX and gain access to online courses in a wide range of subjects, administered by accredited universities and organizations around the world. After successful completion of a course, a user may achieve a certificate of completion.\\
+edX is a non-profit, open source MOOC platform that aims to provide educational content to worldwide users. Users sign up on edX and gain access to online courses in a wide range of subjects, administered by accredited universities and organizations around the world. After successful completion of a course, a user may achieve a certificate of completion.\\
 
 Courses, run by universities, are administered by staff that handle the operations of the course. These staff members control course content and the student experience.\\
 
 \section{Principals and Authorized Behavior}
-The platform has a hierarchy of roles. They are, in order: edX employees, universities, course staff, students, and everyone. Each have their own set of allowed functions:
+The platform has a hierarchy of user roles. They are, in order: edX employees, universities, course staff, students, and everyone. No user in a role at a certain level has greater permissions than those users in levels above him/her. Each have their own set of allowed functions:
 
 \subsection{Course staff}
-Course staff comprises of both Instructors and TAs. Course staff must be able to authorize student enrollment into their course, authorize other instructors to co-administer their course, modify course meta-data (name, description) and content, send signed feedback to student, view the submissions of student enrolled in their course(s), modify their own profile information (email, login username, password), add new courses, and award certificate of completion to select student users.
+Course staff comprises of both Instructors and TAs. Course staff must be able to perform the following actions:
+\begin{itemize}
+\item Authorize student enrollment into their course
+\item Authorize other instructors to co-administer their course
+\item Modify course meta-data (name, description) and content
+\item Send signed feedback to student
+\item View the submissions of student enrolled in their course(s)
+\item Modify their own profile information (email, login username, password)
+\item Award certificate of completion to select student users.
+\end{itemize}
+
 \subsection{Students}
-When logged in, a student must be able to request enrollment into a course, view content for an  enrolled courses (to the extent allowed by course instructor(s)), submit digitally signed answers and feedback to (enrolled) course instructor, modify their own profile information (login username, password, email), and receive certificate of completions as determined by the instructor.\\
+When logged in, a student must be able to perform the following actions:
+\begin{itemize}
+\item Request enrollment into a course
+\item View content for an enrolled courses (to the extent allowed by course instructor(s))
+\item Submit digitally signed answers and feedback to (enrolled) course instructor
+\item Modify their own profile information (login username, password, email, payment information)
+\item Receive certificate of completions as determined by the instructor.
+\end{itemize}
 
 Each student is permitted to recieve only one type of course accredidation after completing the coursework and with course staff approval. Based on whether the student enrolled in the for-credit paid version (Verified Certificate Candidate) or the free version (Honor Code Certificate Candidate), they must recieve the correct certificate, only once.\\
 
@@ -78,10 +95,9 @@ Everyone should be able to view an introductory video, read the course descripti
 \end{itemize}
 
 \section{Security Goals}
-Out of the 3 general security goals, integrity is the most relevant and crucial for edX. Since edX-type platforms are metaphorical to a traditional classroom, courses need to maintain the integrity of their data, and unauthorized users such as students or administrators of other courses should not be able to modify a specific course's data. Confidentiality is another important goal - the information of edX users should not be compromised to unauthorized parties.
 
 \subsection{Integrity}
-Specific security goals that fall under integrity include the following.
+Out of the 3 general security goals, integrity is the most relevant and crucial for edX. Since edX-type platforms are metaphorical to a traditional classroom, courses need to maintain the integrity of their data, and unauthorized users such as students or administrators of other courses should not be able to modify a specific course's data. Specific security goals that fall under integrity include the following.
 \begin{itemize}
 \item Ensuring that anyone with permissions of or lower than that of a student cannot change another student's data or course data.
 \item Ensuring that course staff cannot change data of courses they are not administrators of.
@@ -90,20 +106,15 @@ Specific security goals that fall under integrity include the following.
 \end{itemize}
 
 \subsection{Confidentiality}
+Confidentiality is another important goal - the information of edX users should not be compromised to unauthorized parties. In addition, like many online platforms and sites, edX contains sensitive user data such as credit card/billing information and personal details. The main confidentiality goals are the following.
 \begin{itemize}
-\item only students and teachers should be able to see grades
+\item A student should only be able to see his/her own grades and course content relevant to him/her.
+\item Course staff should only be able to see their own courses' content and course-related student data.
+\item A user should only be able to see his/her own sensitive personal/account information such as credit card information.
 \end{itemize}
 
 \subsection{Availability}
-\begin{itemize}
-\item not as pressing as say, a hospital service, not endangering lives
-\item everything/permissions should be maintained even if service becomes unavailable
-\end{itemize}
-
-\textbf{Confidentiality/Integrity Details:}: Specifically, by use of some security mechanism (perhaps, OAuth 2.0 or like), we intend that the platform forbids the student viewing or modify the content and progress of other users (except to view the content of their enrolled courses as allowed by their course instructors). The student should not be able to obtain completion certificates without proper authentication.\\
-
-The teacher should not be able to view the submissions of students not currently in their course. They should not be able to update the content of the courses that they were not authorized to administer.\\
-
+While availability is always important, it has lower priority than other security goals in the context of platforms like edX. Educational courses are not as crucial to its users as other services are to its users, such as hospital systems, space communication systems, and even email. The main availability goal is for all platform data and permissions to be maintained in the event of service unavailability.
 
 \end{document}
 
