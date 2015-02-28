@@ -1,0 +1,7 @@
+#!/bin/bash
+
+THREADS=$0
+HASH=$1
+LENGTH=$2
+
+
