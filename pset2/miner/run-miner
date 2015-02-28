@@ -1,7 +1,19 @@
 #!/bin/bash
 
-THREADS=$0
-HASH=$1
-LENGTH=$2
+APARAPI_PATH='/home/skoppula/aparapi'
 
+if [ $# -gt 0 ]; then
+	echo "Your command line contains $# arguments"
+	THREADS=$0
+	HASH=$1
+	LENGTH=$2
+else
+	echo "Using default arguments"
+	THREADS=512
+	HASH=000000000011b5853b8a6b0a1684383bf400d824665622e502f6b531d0330439
+	LENGTH=1476
+fi
+
+
+java -Djava.library.path=$APARAPI_PATH -Dcom.amd.aparapi.executionMode=GPU -classpath $APARAPI_PATH/aparapi.jar:miner.jar Miner 17 $THREADS $HASH $LENGTH
 
