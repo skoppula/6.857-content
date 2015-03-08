@@ -45,11 +45,20 @@
 \end{enumerate}
 
 \answer{2-2 Hash Functions}
-a. $E[collisions]=\sum{P(h(x_i)=P(x_j))}={n \choose 2} \cdot 2^{-d}$. When $n$, the number of hashes we compute is $c \cdot 2^{d/2}$, $E[collisions]={c \cdot 2^{d/2} \choose 2} \cdot 2^{-d}$. This approximates to $\frac{(c\cdot 2^{d/2})^2}{2} \cdot 2^{-d}=\frac{c^2}{2}$.\\
+\begin{enumerate}[label=(\alph*)]
+\item $E[collisions]=\sum{P(h(x_i)=P(x_j))}={n \choose 2} \cdot 2^{-d}$. When $n$, the number of hashes we compute, is $c \cdot 2^{d/2}$:
+$$
+E[collisions]={c \cdot 2^{d/2} \choose 2} \cdot 2^{-d}
+$$
+This approximates to $\frac{(c\cdot 2^{d/2})^2}{2} \cdot 2^{-d}=\frac{c^2}{2}$.
 
-b. XOR'ing two inputs does not change one-way of the function. is one way. AND is not because it changes the distribution
-c. Not collision resistant. For any x1, x2, you can pick y1, y2 such that y1 = x1 xor x2 and y2 = 0. Then we clearly have a collision.
-d. Not weak collision resistant. Given x = x1, x2, we can just find x' = x2, x1 which will collide. If x1 = x2, we can just use 0, 0.
+\item XOR'ing two inputs does not change one-way of the function. $x \oplus y$ distributes evenly across the input space $\{0,1\}^n$ of $h(x)$; if finding $n$ given $h(n)$ is is worst case $O(2^{d})$ operations, finding $x \oplus y$ (and thus $x,y$) given $h'(x,y)=h(x\oplus y)$, is still $O(2^d)$.\\
+
+However, in the case of AND'ing the two inputs, $x \wedge y$ distributes unevenly across $\{0,1\}^n$; for example, given a random $x,y$, our input to $h(n)$ is much more likely to have be entirely 0's than entirely 1's. Because our input space collapsed in a certain direction, iterating through $x,y$ to find our $h'(x,y)$ no longer is expected $\Theta(2^d)$.
+
+\item Not collision resistant. For any x1, x2, you can pick y1, y2 such that y1 = x1 xor x2 and y2 = 0. Then we clearly have a collision.
+\item Not weak collision resistant. Given x = x1, x2, we can just find x' = x2, x1 which will collide. If x1 = x2, we can just use 0, 0.
+\end{enumerate}
 
 
 
