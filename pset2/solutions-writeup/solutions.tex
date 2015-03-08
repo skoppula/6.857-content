@@ -11,7 +11,6 @@
 \usepackage{amsmath}
 \usepackage{latexsym}
 \usepackage{enumitem}
-\usepackage{url}
 \setlength{\parskip}{1pc}
 \setlength{\parindent}{0pt}
 \setlength{\topmargin}{-3pc}
@@ -46,34 +45,22 @@
 \end{enumerate}
 
 \answer{2-2 Hash Functions}
-\begin{enumerate}[label=(\alph*)]
-\item $E[collisions]=\sum{P(h(x_i)=P(x_j))}={n \choose 2} \cdot 2^{-d}$. When $n$, the number of hashes we compute, is $c \cdot 2^{d/2}$:
-$$
-E[collisions]={c \cdot 2^{d/2} \choose 2} \cdot 2^{-d}
-$$
-This approximates to $\frac{(c\cdot 2^{d/2})^2}{2} \cdot 2^{-d}=\frac{c^2}{2}$.
+a. $E[collisions]=\sum{P(h(x_i)=P(x_j))}={n \choose 2} \cdot 2^{-d}$. When $n$, the number of hashes we compute is $c \cdot 2^{d/2}$, $E[collisions]={c \cdot 2^{d/2} \choose 2} \cdot 2^{-d}$. This approximates to $\frac{(c\cdot 2^{d/2})^2}{2} \cdot 2^{-d}=\frac{c^2}{2}$.\\
 
-\item XOR'ing two inputs does not change one-way of the function. $x \oplus y$ distributes evenly across the input space $\{0,1\}^n$ of $h(x)$; if finding $n$ given $h(n)$ is is worst case $O(2^{d})$ operations, finding $x \oplus y$ (and thus $x,y$) given $h'(x,y)=h(x\oplus y)$, is still $O(2^d)$.\\
+b. XOR'ing two inputs does not change one-way of the function. $x \oplus y$ distributes evenly across the input space $\{0,1\}^d$ of $h(n)$; if finding $n$ given $h(n)$ is is worst case $O(2^{d})$ operations, finding $x \oplus y$ (and thus $x,y$) given $h'(x,y)=h(x\oplus y)$, is still $O(2^d)$.\\
 
-However, in the case of AND'ing the two inputs, $x \wedge y$ distributes unevenly across $\{0,1\}^n$; for example, given a random $x,y$, our input to $h(n)$ is much more likely to have be entirely 0's than entirely 1's. Because our input space collapsed in a certain direction, iterating through $x,y$ to find our $h'(x,y)$ no longer is expected $\Theta(2^d)$.
-
-\item Not collision resistant. For any $x_1$, $x_2$, pick $y_1$, $y_2$ such that $y_1 = h(x_2)$ and $y_2 = h(x_1)$.
-$$h'(x_1,y_1)=h(x_1) \oplus y_1 = h(x_1) \oplus h(x_2) =  h(x_2) \oplus h(x_1) = h(x_2) + y_2 = h'(x_2,y_2)$$
-We have a collision.
-
-\item Not weak collision resistant. Because $h(x)$ is only TCR, we can assume that finding $x_1, x_2$ s.t. $h(x_1)=h(x_2)$ is easy. That means for target $h'(x,y)=0$, finding colliding $x,y$ is easy with the aforementioned pairs because $h(x_1) \oplus h(x_2) = h(x_1) \oplus h(x_1) = 0$. More generally, for any target $h'(x,y)$ and input $(x,y)$, the input $(y,x)$ always collides with the target, because of the commutivity of XOR.
-
-\end{enumerate}
+However, in the case of AND'ing the two inputs, $x \and y$
+c. Not collision resistant. For any x1, x2, you can pick y1, y2 such that y1 = x1 xor x2 and y2 = 0. Then we clearly have a collision.
+d. Not weak collision resistant. Given x = x1, x2, we can just find x' = x2, x1 which will collide. If x1 = x2, we can just use 0, 0.
 
 
 
 \answer{2-3 Cryptocurrency}
-\begin{enumerate}[label=(\alph*)]
-\item 000000c4d41c812229f06b454c5be8ed7578a839ce14a564e29439700b0000d1
-\item 000000000013e89b64470493ae52b798b8c0c3392be7664bf913851134eae35f if the current chain is the longest chain. 0000000013bd8a5052bf398013a5847d17df2ed0ab5856e937e060748bfd3ea6 if a different chain overtakes the longest chain when the assignment is due. I currently suspect that the teams pushing the chain where we have the second hash are hiding their results and will publish all of them when the assignment is due. We coded a GPU based Java program using the aparapi library and continuously tried to add to the current longest chain. The program works by randomly creating hashes and checking if they have the correct number of zeros. Every some seconds, we query to see if the current node has a next node. If so, we stop trying to build a block and work on the next block instead. Generally, we waited at most 4 confirmations to determine that our block was on the longest chain. We have about 300 Megahashes/second and have been running this since 2/26. 
-\item To reverse a transaction six levels deep into the chain, you'll need a hashing rate higher than the Bitcoin network hash rate to catch up and create blocks faster than the network. The current hashrate is 339617 Terahash/s (bitcoinwatch.com). A high end ASICs designed for mining (e.g. AntMiner S4) is advertised at 2 million Mhash/sec, costs $\$1400$, draws 1400 Watts (\url{https://en.bitcoin.it/wiki/Mining_hardware_comparison}). To achieve a faster than network speed, we'd need about $\frac{339617 \cdot 10^{12}}{2 \cdot 10^6 \cdot 10^6}=169,809$ of these miners, a total cost of over 237 million on initial hardware. Assume we have a \$0.12 kWH electricity rate, power consumption costs would be $1400
-\item Peinan and Skanda spent it on food.
-\end{enumerate}
+3.
+a. 000000c4d41c812229f06b454c5be8ed7578a839ce14a564e29439700b0000d1
+b. 000000000013e89b64470493ae52b798b8c0c3392be7664bf913851134eae35f if the current chain is the longest chain. 0000000013bd8a5052bf398013a5847d17df2ed0ab5856e937e060748bfd3ea6 if a different chain overtakes the longest chain when the assignment is due. I currently suspect that the teams pushing the chain where we have the second hash are hiding their results and will publish all of them when the assignment is due. We coded a GPU based Java program using the aparapi library and continuously tried to add to the current longest chain. The program works by randomly creating hashes and checking if they have the correct number of zeros. Every some seconds, we query to see if the current node has a next node. If so, we stop trying to build a block and work on the next block instead. Generally, we waited at most 4 confirmations to determine that our block was on the longest chain. We have about 300 Megahashes/second and have been running this since 2/26. 
+c. Haven't done
+d. Peinan spent it on food.
 
 
 \end{document}
