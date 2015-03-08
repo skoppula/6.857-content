@@ -56,7 +56,10 @@ This approximates to $\frac{(c\cdot 2^{d/2})^2}{2} \cdot 2^{-d}=\frac{c^2}{2}$.
 
 However, in the case of AND'ing the two inputs, $x \wedge y$ distributes unevenly across $\{0,1\}^n$; for example, given a random $x,y$, our input to $h(n)$ is much more likely to have be entirely 0's than entirely 1's. Because our input space collapsed in a certain direction, iterating through $x,y$ to find our $h'(x,y)$ no longer is expected $\Theta(2^d)$.
 
-\item Not collision resistant. For any x1, x2, you can pick y1, y2 such that y1 = x1 xor x2 and y2 = 0. Then we clearly have a collision.
+\item Not collision resistant. For any $x_1$, $x_2$, pick $y_1$, $y_2$ such that $y_1 = h(x_2)$ and $y_2 = h(x_1)$.
+$$h'(x_1,y_1)=h(x_1) \oplus y_1 = h(x_1) \oplus h(x_2) =  h(x_2) \oplus h(x_1) = h(x_2) + y_2 = h'(x_2,y_2)$$
+We have a collision.
+
 \item Not weak collision resistant. Given x = x1, x2, we can just find x' = x2, x1 which will collide. If x1 = x2, we can just use 0, 0.
 \end{enumerate}
 
