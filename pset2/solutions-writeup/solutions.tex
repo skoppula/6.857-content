@@ -9,9 +9,9 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{amsmath}
+\usepackage{url}
 \usepackage{latexsym}
 \usepackage{enumitem}
-\usepackage{url}
 \setlength{\parskip}{1pc}
 \setlength{\parindent}{0pt}
 \setlength{\topmargin}{-3pc}
@@ -45,6 +45,8 @@
 \item We make it so both inputs of the OR gate will construct the same secret. So, Professor Rivest gets the secret and ((2 out of 3 TA's) AND (10 out of 20 students)) will be able to construct the same secret. We then make the AND gate a 2 out of 2 Shamir secret-sharing gate and give both inputs a share which is also a secret. In this case, (2 out of 3 TA's) will be enough to reconstruct S1 and (10 out of 20 students) will reconstruct S2. Where S1 and S2 are secrets, S1 is not S2, and S1 and S2 are the shares that together will reconstruct out original secret. Then, we use Shamir secret-sharing for both (2 out of 3 TA's) and (10 out of 20 students) such that (2 out of 3 TA's) will reconstruct the secret S1 and (10 out of 20 students) will reconstruct the secret S2.
 \end{enumerate}
 
+We spent about 1 hour on this problem.
+
 \answer{2-2 Hash Functions}
 \begin{enumerate}[label=(\alph*)]
 \item $E[collisions]=\sum{P(h(x_i)=P(x_j))}={n \choose 2} \cdot 2^{-d}$. When $n$, the number of hashes we compute, is $c \cdot 2^{d/2}$:
@@ -65,18 +67,19 @@ We have a collision.
 
 \end{enumerate}
 
-
+We spent about 2 hours on this problem.
 
 \answer{2-3 Cryptocurrency}
 \begin{enumerate}[label=(\alph*)]
 \item 000000c4d41c812229f06b454c5be8ed7578a839ce14a564e29439700b0000d1
 
-\item 000000000013e89b64470493ae52b798b8c0c3392be7664bf913851134eae35f if the current chain is the longest chain. 0000000013bd8a5052bf398013a5847d17df2ed0ab5856e937e060748bfd3ea6 if a different chain overtakes the longest chain when the assignment is due. I currently suspect that the teams pushing the chain where we have the second hash are hiding their results and will publish all of them when the assignment is due. We coded a GPU based Java program using the aparapi library and continuously tried to add to the current longest chain. The program works by randomly creating hashes and checking if they have the correct number of zeros. Every some seconds, we query to see if the current node has a next node. If so, we stop trying to build a block and work on the next block instead. Generally, we waited at most 4 confirmations to determine that our block was on the longest chain. We have about 300 Megahashes/second and have been running this since 2/26. 
+\item We (team 17) were on the longest chain until yesterday. We had several hashes on that chain, one of which was 000000000013e89b64470493ae52b798b8c0c3392be7664bf913851134eae35f at that time. There were some teams that published their entire chain today. We coded a GPU based Java program using the aparapi library and continuously tried to add to the current longest chain. The program works by randomly creating hashes and checking if they have the correct number of zeros. Every some seconds, we query to see if the current node has a next node. If so, we stop trying to build a block and work on the next block instead. Generally, we waited at most 4 confirmations to determine that our block was on the longest chain. We have about 300 Megahashes/second and have been running this continuously since 2/26. There was probably some downtime during that time, but we were essentially mining the entire time. We cooperated with teams 11, 15, and 32 and had about 1.2 Gigahashes/second together. Unfortunately, we are no longer on the longest chain. For next year, I think that people should become unable to add to blocks after some time. That is, blocks should expire over time. This would prevent the issues with /explore and make the current /head a lot more transparent. Another possible way is to generate a random value when a block is submitted that users must query for to work on the next block. We generally didn't like the complete lack of transparency throughout the process. We constantly were paranoid about whether we were actually on the longest chain or not because of this.
 
 \item To reverse a transaction six levels deep into the chain, you'll need a hashing rate higher than the Bitcoin network hash rate to catch up and create blocks faster than the network. The current hashrate is 339617 Terahash/s (\url{https://bitcoinwisdom.com/bitcoin/difficulty}). A high end ASICs designed for mining (e.g. AntMiner S4) is advertised at 2 million Mhash/sec, costs $\$1400$, draws 1400 Watts (\url{https://en.bitcoin.it/wiki/Mining_hardware_comparison}). To achieve a faster than network speed, we'd need about $\frac{339617 \cdot 10^{12}}{2 \cdot 10^6 \cdot 10^6}=169,809$ of these miners. We’d also need a few more machines to not just match, but also outpace the network to catch up our chain, so we’ll chuck in 1106 more: 172,500 mining ASICs, for a total of \$241500000 in initial hardware costs. Bitcoin requires about 51 zeroes at the end of the hash, so it’ll take about $2^{51}$ hash guesses to find a valid block hash. That means that to recover 6 blocks with our 1000 extra machines would take $\frac{2^{51}}{2 \cdot 10^6} \cdot \frac{1}{60 \cdot 60 \cdot 60} \cdot 6 \cdot 1000 = 78$ days. Assuming a \$0.12 kWH electricity rate, power consumpetion would add another $0.12 \cdot 1400 \cdot (24 \cdot 78) = \$314496$.
 \item Peinan and Skanda spent it on food.
 \end{enumerate}
 
+We spent over a week on this problem. If you don't include the active mining and politics, we spent about 6 hours on this problem. These 6 hours include the time to code the miner and the time to do 3c.
 
 \end{document}
 
