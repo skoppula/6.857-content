@@ -1,7 +1,7 @@
 file=solutions
-finalname=pset2
-author1=chenp
-author2=cpp0101
+finalname=pset3
+author1=julia_h
+author2=toyk2a
 author3=skoppula
 
 pdf: 
