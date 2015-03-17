@@ -15,7 +15,7 @@ def run_ks(lst1, lst2):
     data1 = np.array(lst1, np.int32)
     data2 = np.array(lst2, np.int32)
 
-    return ks_2samp(data1, data2)[0]
+    return ks_2samp(data1, data2)[1]
 
 
 '''
