@@ -1,17 +1,17 @@
 % 6.857 homework template
 \documentclass[11pt]{article}
 
-\newcommand{\team}{Kimberly Toy \\ Julia Huang \\ Skanda Koppula}
+\newcommand{\team}{Julia Huang \\ Skanda Koppula \\ Kimberly Toy}
 \newcommand{\ps}{Problem Set 3}
 
 %\pagestyle{headings}
-\usepackage[dvips]{graphics,color}
 \usepackage{amsfonts}
+\usepackage{minted}
+\usepackage{graphicx}
 \usepackage{amssymb}
 \usepackage{amsmath}
-\usepackage{latexsym}
-\usepackage{enumitem}
 \usepackage{url}
+\usepackage{latexsym}
 \setlength{\parskip}{1pc}
 \setlength{\parindent}{0pt}
 \setlength{\topmargin}{-3pc}
@@ -41,7 +41,14 @@
 \answer{3-1 Stream Ciphers}
 
 \answer{3-3 AES Distinguisher}
+A. We need to determine if two samples are drawn from the same distribution. For this, we use the Kolmogorov-Smirnov test that can be used to test whether the two underlying probability distributions for two one-dimensional samples are different. This is what we desire when analyzing our two samples ${x_1, x_2, x_3, ..., x_n}$ and ${y_1, y_2, y_3, ..., y_n}$. The KS test outputs a p-value, if below an appropriate threshold (e.g. 0.10), the samples are probably have different underlying distributions.
 
+For our implementation of Kolmogorov-Smirnov, we use the \mintinline{bash}{scipy.stats} package:
+\inputminted[firstline=8,lastline=18]{python}{problem3.py}
+
+B and C. For our implementation of AES/Rijndael, we used a Python script based on an implementation by Bram Cohen: \url{http://wiki.birth-online.de/snippets/python/aes-rijndael}. We modified the script to take the number of rounds as an initialization parameter. Using this, we calculated two KS scores for each 0<r<21, where r is the number of rounds in our Rijndael: (1) the KS between the sample of distinct bytes in $AES_r=F(r,p,q)$ and $AES_{10}=F(10,p,q)$, and (2) the KS between the sample of distinct bytes in $AES_r=F(r,p,q)$ and a sample of random bytes of same size. To do this, we wrote the script on the next page. We obtained the following output:
+
+\inputminted[firstline=26,lastline=60]{python}{problem3.py}
 
 \end{document}
 

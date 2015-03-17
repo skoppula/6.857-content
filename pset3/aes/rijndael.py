@@ -197,14 +197,18 @@ del cox
 del iG
 
 class rijndael:
-    def __init__(self, key, block_size = 16):
+    def __init__(self, key, block_size = 16, rounds = -1):
         if block_size != 16 and block_size != 24 and block_size != 32:
             raise ValueError('Invalid block size: ' + str(block_size))
         if len(key) != 16 and len(key) != 24 and len(key) != 32:
             raise ValueError('Invalid key size: ' + str(len(key)))
         self.block_size = block_size
 
-        ROUNDS = num_rounds[len(key)][block_size]
+        if rounds == -1:
+            ROUNDS = num_rounds[len(key)][block_size]
+        else:
+            ROUNDS = rounds
+        #print 'Using ', ROUNDS, ' rounds.'
         BC = block_size // 4
         # encryption round keys
         Ke = [[0] * BC for i in range(ROUNDS + 1)]
