@@ -1,0 +1,90 @@
+% 6.857 homework template
+\documentclass[11pt]{article}
+
+\newcommand{\team}{Kimberly Toy \\ Julia Huang \\ Skanda Koppula}
+\newcommand{\ps}{Problem Set 3}
+
+%\pagestyle{headings}
+\usepackage[dvips]{graphics,color}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{enumitem}
+\usepackage{url}
+\setlength{\parskip}{1pc}
+\setlength{\parindent}{0pt}
+\setlength{\topmargin}{-3pc}
+\setlength{\textheight}{9.5in}
+\setlength{\oddsidemargin}{0pc}
+\setlength{\evensidemargin}{0pc}
+\setlength{\textwidth}{6.5in}
+
+\newcommand{\answer}[1]{
+\newpage
+\noindent
+\framebox{
+	\vbox{
+		6.857 Homework \hfill {\bf \ps} \hfill \# #1  \\ 
+		\team \hfill \today
+	}
+}
+\bigskip
+
+}
+
+
+\begin{document}
+
+\answer{3-1 Modes of Operation}
+\begin{enumerate}[label*=\alph*.]
+\item 
+\begin{itemize}
+\item ECB is not IND-CPA secure because there is no randomization. Then, if we take a distinct block from $m_0$, and encrypt it, we expect it to show up in the ciphertext only if the examiner picked $b=0$. Then, even if we don't have the decryption function, we can still figure out with high probability what the examiner picked, and ECB is not IND-CPA secure.
+\\
+\item CBC is IND-CPA secure. Because we are no longer given the decryption block, the IV is not transmitted in the clear. Since each block's security relies on xor'ing with a value before encryption, we can only figure out the relation of the plaintext with the ciphertext if we have these values, which is the IV or the ciphertext blocks, which we only know if we have the original IV value. Because we don't have this IV value, it should be difficult to decrypt a ciphertext and CBC is thus IND-CPA secure.
+\\
+\item UFE - We know from class that UFE is IND-CCA secure. Thus it is IND-CPA secure -- if we are unlikely to decrypt the message given both the encryption and decryption functions, then we are unlikely to decrypt the message with just the encryption function.
+\\
+\end{itemize}
+
+\newpage
+\item CBC mode is not secure against this new adversary. We note that the padding oracle will return 0 if and only if the last block contains only 0s. In order to take advantage of when the padding oracle returns this distinct answer, we can try to give it a ciphertext that will give us this last block. if we let the last two blocks of the ciphertext we receive and already padded plaintext $m_0$ (that we pass to the adversary) be $c_1$, $c_2$, and $m_{0,1}$, $m_{0,2}$ respectively, and the decryption of $c_2$ be $x$, then we know that:
+\begin{align*} 
+m_{0,2} &= c_1 \oplus x
+\intertext{Let $c'_1$ be the changed ciphertext we pass to the padding oracle, and $g$ be a guess we use to take advantage of the oracle}
+c'_1 &= c_1 \oplus g
+\\ m'_2 &= c'_1 \oplus x 
+\\ &= c_1 \oplus g \oplus x
+\\ &= m_{0,2} \oplus g
+\end{align*}
+Then, the only way to get our new last block of the plaintext the padding oracle looks at ($m'_2$) to be all 0s, our guess $g$ must be the exact same value as $m_{0,2}$, or the last block of the plaintext $m_0$.
+
+So, if we change the last block of the ciphertext we are returned and xor it with the last block of the plaintext $m_0$, if the padding oracle returns 0, we know that $b = 0$, otherwise $b = 1$.
+
+\item Let us first take a look at the last block. We can start by xor'ing the ciphertext with a guess of the last 2 bytes, then 3 bytes, etc, until we find the start of the padding, and then continue to decipher the whole last block. Since the last block is directly affected by the previous cipherblock, we will look again at the last two cipherblocks and last two plaintext blocks -- $c_1, c_2$, and $m_1, m_2$. Again we have:
+\begin{align*} 
+m_2 &= c_1 \oplus x
+\intertext{Let $c'_1$ be the changed ciphertext we pass to the padding oracle, and $g$ be a \textbf{one byte} guess we use to take advantage of the oracle}
+c'_1 &= c_1 \oplus ( g || 10000000)
+\\ m'_2 &= c'_1 \oplus x 
+\\ &= c_1 \oplus ( g || 10000000) \oplus x
+\\ &= m_2 \oplus ( g || 10000000)
+\end{align*}
+Then, if we try two separate guesses for $g$ and pass both ciphertexts to the padding oracle, and see that both give us the result of a 1, we know that the last byte of $m_2$ is 0x00. Otherwise, at least the oracle will respond with at least one 0, and the last byte of $m_2$ consists of 0x10. We can repeat this; so the next step would be:
+\begin{align*} 
+c'_1 &= c_1 \oplus ( g || 10000000 || m_2[\text{found bytes}])
+\\ m'_2 &= m_2 \oplus ( g || 10000000 || m_2[\text{found bytes}])
+\end{align*}
+We would again try two separate guesses for $g$ to determine the last unknown byte of $m_2$ in the exact same method. If the oracle gives us two ones, we set the last unknown byte to be 0x00; otherwise the last unknown byte is 0x10. After we have found the 0x10 block, we start a different type of guessing. We have 
+\begin{align*} 
+c'_1 &= c_1 \oplus ( g || m_2[\text{found bytes}])
+\\ m'_2 &= m_2 \oplus ( g || m_2[\text{found bytes}])
+\end{align*}
+And instead of trying two different values for $g$, we will try all different values for $g$. If there is only one value of $g$ where the padding oracle returns 1, then we know the last unknown byte of $m_2$. However, it is also possible to get two values of $g$ where the padding oracle returns 1; let the two possible guesses of the last unknown byte $b$ be $m_2[x] \oplus$ 0x10 and $m_2[x]$.  The first occurs when byte $b$, when deciphered by the padding oracle, returns a 0x10, and the second guess occurs when byte $b$ gets zeroed out when deciphered by the padding oracle instead of turning to 0x10, and the bytes preceding it consist of one 0x10 byte followed by some (or possibly none) 0x00 bytes. 
+We can deal with this by continuing on with either guess. If we make all 256 guesses for byte $b-1$ with some guess $g_{\{0,1\}}$ for byte $b$ and the oracle returns 1 for all of them, then we know that the guess for byte $b$ gives us 0x10 when the padding oracle deciphered it and is wrong. This is the incorrect guess, so we use the other guess. Otherwise, we will continue as before and only get one or two possible values for $g$ where the padding oracle returns 1. Note that if we are decoding the first byte, there can only be one value of $g$ because we no longer have this problem. For every other block, we know that there is no padding. Then, we can decrypt it as we did with the nonpadded bytes of the last byte. This will gives us polynomial time of 256 guesses per byte * 256 bytes. 
+
+\item Nope.
+\end{enumerate}
+\end{document}
+
