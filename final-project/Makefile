@@ -1,4 +1,4 @@
-filename=paper
+filename=report
 
 pdf: 
 		pdflatex --shell-escape ${filename}.tex
@@ -18,9 +18,9 @@ mpc:
 		pdflatex --shell-escape ${filename}.tex
 
 		#FOR LINUX:
-	    evince ${filename}.pdf &
+	    #evince ${filename}.pdf &
 		#FOR OS X:
-	    #open ${filename}.pdf &
+	    open ${filename}.pdf &
         
 		rm -rf ${filename}.log ${filename}.aux missfont.log _minted-${filename} texput.log *.bbl *.blg *.lof *.toc *.out
 
